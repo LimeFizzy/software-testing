@@ -1,0 +1,19 @@
+# Dependencies
+node_modules
+
+# Build outputs
+dist
+build
+coverage
+
+# Playwright artifacts
+test-results
+playwright-report
+playwright/.cache
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store

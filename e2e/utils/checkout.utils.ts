@@ -1,6 +1,7 @@
 import type { Page } from '@playwright/test';
 import type { BillingAddress } from '../types/test-data.types';
-import { ECOM_SELECTORS } from '../constants/selectors';
+import { ECOM_SELECTORS, URL_PATTERNS } from '../constants/selectors';
+import { navigateToSection } from './navigation.utils';
 
 export const fillBillingAddress = async (page: Page, billingData: BillingAddress) => {
   await page.selectOption(ECOM_SELECTORS.BILLING.COUNTRY, { label: billingData.country });
@@ -29,6 +30,22 @@ export const completeCheckoutSteps = async (page: Page) => {
 export const proceedToCheckout = async (page: Page) => {
   await page.check(ECOM_SELECTORS.CART.TERMS_CHECKBOX);
   await page.click(ECOM_SELECTORS.CART.CHECKOUT_BUTTON);
+};
+
+export const clearCart = async (page: Page) => {
+  await navigateToSection(page, ECOM_SELECTORS.NAV.CART, URL_PATTERNS.CART);
+  const removeCheckboxes = page.locator(ECOM_SELECTORS.CART.REMOVE_CHECKBOX);
+  const count = await removeCheckboxes.count();
+
+  if (count === 0) {
+    return;
+  }
+
+  await removeCheckboxes.evaluateAll((checkboxes: HTMLInputElement[]) =>
+    checkboxes.forEach((cb) => (cb.checked = true))
+  );
+  await page.click(ECOM_SELECTORS.CART.UPDATE_BUTTON);
+  await page.waitForSelector(ECOM_SELECTORS.CART.ITEM_ROW, { state: 'detached' });
 };
 
 export const confirmOrder = async (page: Page) => {

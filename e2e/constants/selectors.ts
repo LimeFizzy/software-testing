@@ -7,11 +7,18 @@ export const ECOM_SELECTORS = {
 
   NAV: {
     REGISTER: 'a[href="/register"]',
+    LOGIN: 'a[href="/login"]',
     COMPUTERS: 'a[href="/computers"]',
     NOTEBOOKS: 'a[href="/notebooks"]',
     ELECTRONICS: 'a[href="/electronics"]',
     CELL_PHONES: 'a[href="/cell-phones"]',
     CART: 'a[href="/cart"]',
+  },
+
+  LOGIN: {
+    EMAIL: '#Email',
+    PASSWORD: '#Password',
+    SUBMIT_BUTTON: 'input[value="Log in"]',
   },
 
   REGISTRATION: {
@@ -143,6 +150,7 @@ export const DEMOQA_SELECTORS = {
 
 export const URL_PATTERNS = {
   REGISTER: /.*register/,
+  LOGIN: /.*login/,
   COMPUTERS: /.*computers/,
   NOTEBOOKS: /.*notebooks/,
   ELECTRONICS: /.*electronics/,

@@ -3,14 +3,14 @@ import {
   loadTestUsersFromFile,
   navigateToHome,
   navigateToSection,
-  registerUser,
+  loginUser,
   selectProductByPrice,
   addProductToCart,
   proceedToCheckout,
-  fillBillingAddress,
   completeCheckoutSteps,
   confirmOrder,
   getOrderNumber,
+  clearCart,
 } from './utils';
 import { ECOM_SELECTORS, URL_PATTERNS, APP_CONFIG } from './constants';
 
@@ -20,16 +20,14 @@ for (const userData of testUsers) {
   test.describe(`ECOM_4: Data-Driven Purchase - ${userData.email}`, () => {
     test.beforeEach(async ({ page }) => {
       await navigateToHome(page, APP_CONFIG.ECOM_BASE_URL, ECOM_SELECTORS.HEADER.LOGO);
-      await navigateToSection(page, ECOM_SELECTORS.NAV.REGISTER, URL_PATTERNS.REGISTER);
-      await registerUser(page, userData);
-      await expect(page.locator(ECOM_SELECTORS.REGISTRATION.SUCCESS_MESSAGE)).toContainText(
-        'Your registration completed'
-      );
+      await navigateToSection(page, ECOM_SELECTORS.NAV.LOGIN, URL_PATTERNS.LOGIN);
+      await loginUser(page, userData);
       await expect(page.locator(ECOM_SELECTORS.HEADER.ACCOUNT)).toContainText(userData.email);
       await expect(page.locator(ECOM_SELECTORS.CART.QUANTITY_BADGE)).toContainText('(0)');
     });
 
     test.afterEach(async ({ page }) => {
+      await clearCart(page);
       await page.click('a[href="/logout"]');
       await page.waitForURL(APP_CONFIG.ECOM_BASE_URL);
       await expect(page.locator(ECOM_SELECTORS.HEADER.ACCOUNT)).not.toBeVisible();
@@ -67,7 +65,6 @@ for (const userData of testUsers) {
       await proceedToCheckout(page);
       await expect(page).toHaveURL(URL_PATTERNS.CHECKOUT);
 
-      await fillBillingAddress(page, userData);
       await completeCheckoutSteps(page);
 
       await expect(page.locator(ECOM_SELECTORS.BILLING.INFO_DISPLAY)).toContainText(userData.city);

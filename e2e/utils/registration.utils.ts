@@ -12,3 +12,9 @@ export const registerUser = async (page: Page, userData: UserRegistrationData) =
 
   await page.click(ECOM_SELECTORS.REGISTRATION.SUBMIT_BUTTON);
 };
+
+export const loginUser = async (page: Page, userData: Pick<UserRegistrationData, 'email' | 'password'>) => {
+  await page.fill(ECOM_SELECTORS.LOGIN.EMAIL, userData.email);
+  await page.fill(ECOM_SELECTORS.LOGIN.PASSWORD, userData.password);
+  await page.click(ECOM_SELECTORS.LOGIN.SUBMIT_BUTTON);
+};

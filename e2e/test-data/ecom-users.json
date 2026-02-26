@@ -1,0 +1,24 @@
+[
+  {
+    "email": "testuser_alpha@test.com",
+    "password": "SecurePass123!",
+    "firstName": "John",
+    "lastName": "Doe",
+    "country": "United States",
+    "city": "New York",
+    "address": "123 Test Street",
+    "zipCode": "10001",
+    "phone": "2025550123"
+  },
+  {
+    "email": "testuser_beta@test.com",
+    "password": "SecurePass456!",
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "country": "United States",
+    "city": "Los Angeles",
+    "address": "456 Sample Ave",
+    "zipCode": "90001",
+    "phone": "2135550456"
+  }
+]

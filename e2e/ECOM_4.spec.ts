@@ -28,7 +28,7 @@ for (const userData of testUsers) {
 
     test.afterEach(async ({ page }) => {
       await clearCart(page);
-      await page.click('a[href="/logout"]');
+      await page.click(ECOM_SELECTORS.NAV.LOGOUT);
       await page.waitForURL(APP_CONFIG.ECOM_BASE_URL);
       await expect(page.locator(ECOM_SELECTORS.HEADER.ACCOUNT)).not.toBeVisible();
     });

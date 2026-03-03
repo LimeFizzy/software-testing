@@ -8,6 +8,7 @@ export const ECOM_SELECTORS = {
   NAV: {
     REGISTER: 'a[href="/register"]',
     LOGIN: 'a[href="/login"]',
+    LOGOUT: 'a[href="/logout"]',
     COMPUTERS: 'a[href="/computers"]',
     NOTEBOOKS: 'a[href="/notebooks"]',
     ELECTRONICS: 'a[href="/electronics"]',

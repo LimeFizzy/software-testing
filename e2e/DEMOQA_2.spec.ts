@@ -32,7 +32,8 @@ test('DEMOQA_2.2: Dynamic Properties', async ({ page }) => {
     DEMOQA_SELECTORS.DYNAMIC_PROPERTIES.VISIBLE_AFTER_ELEMENT
   );
 
-  await expect(enableAfterButton).toBeEnabled({ timeout: 6000 });
-
-  await expect(visibleAfterElement).toBeVisible({ timeout: 6000 });
+  await Promise.all([
+    expect(enableAfterButton).toBeEnabled({ timeout: 6000 }),
+    expect(visibleAfterElement).toBeVisible({ timeout: 6000 }),
+  ]);
 });
